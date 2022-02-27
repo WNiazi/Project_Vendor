@@ -1,0 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+
+@using ProjectVendor.Models;
+
+<h1>Add an Order for @Model.Name</h1>
+@* maybe order without new? *@
+<form action="/vendors/@Model.Id/order/new" method="post">
+
+  <label for="Name">Order name</label>
+  <input id="Name" name="Name" type="text">
+
+  <label for="Description">Order description</label>
+  <input id="Description" name="Description" type="text">
+
+
+  <label for="Quantity">Quantity </label>
+  <input id="Quantity" name="Quantity" type="text">
+
+  <label for="Cost">Cost of Order </label>
+  <input id="Cost" name="Cost" type="text">
+
+  <button type="submit">Add</button>
+</form>
+
+<p><a href="/">Back home</a></p>
+<p><a href="/vendors">Back to Vendors.</a></p>

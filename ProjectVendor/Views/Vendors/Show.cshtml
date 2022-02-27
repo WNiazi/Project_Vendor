@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+@using ProjectVendor.Models;
+
+<h2> Here is the List of Orders for that vendor</h2>
+@foreach (Order order in @Model["order"])
+{
+  <li>order.Name</li>
+  <li>order.Description</li>
+  <li>order.Cost</li>
+  <li>order.Quantity</li>
+}
+
+<a href='/vendors/vendor.Id/order/new'>Adding new Order</a>
+<a href='/vendors'> Go back to vendors </a>
+<a href=' /vendors/new'> Put in new Vendors </a>
+<a href='/'>Home</a>
