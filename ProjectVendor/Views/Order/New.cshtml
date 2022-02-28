@@ -5,8 +5,8 @@
 @using ProjectVendor.Models;
 
 <h1>Add an Order for @Model.Name</h1>
-@* maybe order without new? *@
-<form action="/vendors/@Model.Id/order/new" method="post">
+@* first changed @model.Id then maybe order without new? then added orders with s *@
+<form action="/vendors/@Model.Id/order" method="post">
 
   <label for="Name">Order name</label>
   <input id="Name" name="Name" type="text">
