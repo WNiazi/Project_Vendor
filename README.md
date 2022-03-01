@@ -17,7 +17,7 @@
 * Create a MCV application to helps track the vendors that and the orders belonging to those vendors.  
 ## Setup/Installation Requirements
  
-* Go to GitHub: *****
+* Go to GitHub: git remote add origin https://github.com/WNiazi/Project_Vendor.git
 * Clone Repository to your desktop
 * dotnet build 
 * dotnet run
