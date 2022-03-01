@@ -4,15 +4,17 @@
 
 @using ProjectVendor.Models;
 
-<h2> Here is the List of Orders for that vendor</h2>
-@foreach (Order order in @Model["order"])
-{
-  <li>order.Name</li>
-  <li>order.Description</li>
-  <li>order.Cost</li>
-  <li>order.Quantity</li>
-}
-@* change from order/new to order , changed from *@
+<h2> Information for @Model["vendor"].Name's order.</h2>
+<ol>
+  @foreach (Order order in @Model["order"])
+  {
+    <a href='/vendors/@Model["vendor"].Id/order/@order.Id'></a>
+    <p>Description : @order.Description</p>
+    <p>Cost: $ @order.Cost</p>
+    <p>Quantity: @order.Quantity</p>
+  }
+</ol>
+
 <a href='/vendors/@Model["vendor"].Id/order/new'>Adding new Order</a>
 <br>
 <a href='/vendors'> Go back to vendors </a>

@@ -14,34 +14,16 @@ namespace ProjectVendor.Controllers
       Vendor vendor = Vendor.Find(vendorId);
       return View(vendor);
     }
-    // Submission of the form created above
-    [HttpPost("/vendors/{vendorId}/order/new")]
-    public ActionResult New(int vendorId, string name, string description, int cost, int quantity)
-    {
-      Vendor findVendor = Vendor.Find(vendorId);
-      Order order = new Order(name, description, cost, quantity);
-      return RedirectToAction("Show");
-    }
 
-    [HttpPost("/vendors/{vendorId}/order/new")]
-    public ActionResult Create(int vendorId, string orderName, string description, int cost, int quantity)
+    [HttpGet("/vendors/{vendorId}/order/{orderId}")]
+    public ActionResult Show(int vendorId, int orderId)
     {
+      Order order = Order.Find(orderId);
+      Vendor vendor = Vendor.Find(vendorId);
       Dictionary<string, object> model = new Dictionary<string, object>();
-      Vendor selectedVendor = Vendor.Find(vendorId);
-      Order newOrder = new Order(orderName, description, cost, quantity);
-      selectedVendor.AddOrder(newOrder);
-      List<Order> vendorOrders = selectedVendor.Orders;
-      model.Add("orders", vendorOrders);
-      model.Add("vendor", selectedVendor);
-      return View("Show", model);
+      model.Add("order", order);
+      model.Add("vendor", vendor);
+      return View(model);
     }
-    // [HttpPost("vendors/{vendorId}/order")]
-    // public ActionResult Show(int vendorId)
-    // {
-    //   Vendor findVendor = Vendor.Find(vendorId);
-    //   display orders for that vendor
-    //   return View(vendorId);
-    // }
-
   }
 }

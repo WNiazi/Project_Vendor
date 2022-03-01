@@ -20,6 +20,7 @@ namespace ProjectVendor.Tests
       Order newOrder = new Order("test category", "test", 1, 2);
       Assert.AreEqual(typeof(Order), newOrder.GetType());
     }
+
     [TestMethod]
     public void GetName_ReturnsIndividualItems_String()
     {
@@ -32,18 +33,16 @@ namespace ProjectVendor.Tests
       Order newOrder = new Order(name, description, quantity, cost);
 
       //Act
-      string result = newOrder.Name;
+      string result = newOrder.OrderName;
       string result2 = newOrder.Description;
       int result3 = newOrder.Quantity;
       int result4 = newOrder.Cost;
-      int result5 = newOrder.Id;
 
       //Assert
       Assert.AreEqual(name, result);
       Assert.AreEqual(description, result2);
       Assert.AreEqual(quantity, result3);
       Assert.AreEqual(cost, result4);
-      Assert.AreEqual(1, result5);
     }
 
     [TestMethod]

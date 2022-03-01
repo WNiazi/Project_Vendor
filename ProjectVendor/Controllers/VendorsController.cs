@@ -10,8 +10,8 @@ namespace ProjectVendor.Controllers
     [HttpGet("/vendors")]
     public ActionResult Index()
     {
-      List<Vendor> Vendors = Vendor.GetAll();
-      return View(Vendors);
+      List<Vendor> allVendors = Vendor.GetAll();
+      return View(allVendors);
     }
 
     // //below is attached to the form, allows to create "NEW" -in the newcsthml paget, vendors
@@ -27,7 +27,6 @@ namespace ProjectVendor.Controllers
       Vendor myVendor = new Vendor(name, typeOfVendor);
       return RedirectToAction("Index");
       //"index is the function up top, index(). only takes strings. its' function is to show the list of all the vendors 
-
     }
 
     [HttpPost("/vendors/delete")]
@@ -36,39 +35,33 @@ namespace ProjectVendor.Controllers
       Vendor.ClearAll();
       return View();
     }
+
     //finding one vendor and attaching orders in Dictionary ; you are getting it here
-    [HttpGet("/vendors/{id}")]
-    public ActionResult Show(int id)
+    [HttpGet("/vendors/{Id}")]
+    public ActionResult Show(int Id)
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
-      Vendor selectedVendor = Vendor.Find(id);
+      Vendor selectedVendor = Vendor.Find(Id);
       List<Order> vendorOrders = selectedVendor.Orders;
       model.Add("vendor", selectedVendor);
       model.Add("order", vendorOrders);
       return View(model);
     }
-
-
-    // [HttpGet("/vendor/{vendorId}/order/")]
-    // public ActionResult Index(int vendorId)
-    // {
-    //   Vendor currentVendor = Vendor.Find(vendorId);
-    //   return View(currentVendor);
-    // }
-
     //here you are attaching the vendorId and object of order together and posting it 
-    // [HttpPost("/vendors/{vendorId}/order/new")]
-    // public ActionResult Create(int vendorId, string orderName, string description, int cost, int quantity)
-    // {
-    //   Dictionary<string, object> model = new Dictionary<string, object>();
-    //   Vendor selectedVendor = Vendor.Find(vendorId);
-    //   Order newOrder = new Order(orderName, description, cost, quantity);
-    //   selectedVendor.AddOrder(newOrder);
-    //   List<Order> vendorOrders = selectedVendor.Orders;
-    //   model.Add("orders", vendorOrders);
-    //   model.Add("vendor", selectedVendor);
-    //   return View("Show", model);
-    // }
+
+    [HttpPost("/vendors/{vendorId}/order")]
+
+    public ActionResult Create(int vendorId, string orderName, string description, int cost, int quantity)
+    {
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Vendor foundVendor = Vendor.Find(vendorId);
+      Order newOrder = new Order(orderName, description, cost, quantity);
+      foundVendor.AddOrder(newOrder);
+      List<Order> vendorOrders = foundVendor.Orders;
+      model.Add("order", vendorOrders);
+      model.Add("vendor", foundVendor);
+      return View("Show", model);
+    }
 
   }
 }

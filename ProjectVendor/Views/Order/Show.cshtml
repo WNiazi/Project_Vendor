@@ -10,16 +10,12 @@
 {
   <h3>No Orders have been added yet!</h3>
 }
-
-@foreach (Order order in Model)
-{
-  <p> Below is information regarding the order for this vendor:</p>
-  <h3>Name:<a href='/order/@order.Id'>@order.Name</a></h3>
-  <h3>Description:<a href='/order/@order.Id'>@order.Description</a></h3>
-  <h3>Quantity: <a href='/order/@order.Id'>@order.Quantity</a></h3>
-  <h3>Cost:<a href='/order/@order.Id'>@order.Cost</a></h3>
-
-}
+<p> Below is information regarding the order:</p>
+<h2>@Model["vendor"].Name</h2>
+<h3>Order: @Model["order"].Name, @Model["order"].Description</h3>
+<h3>Quantity: @Model["order"].Quantity</h3>
+<h3>Total cost:$ @Model["order"].Cost</h3>
 
 <p><a href='/'>Back home</a></p>
 <p><a href="/vendors">Back to Vendors.</a></p>
+<p><a href='/vendors/@Model["vendor"].Id/order/new'>Add another order</a> </p>
